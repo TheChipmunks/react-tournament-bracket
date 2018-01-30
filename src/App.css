@@ -1,0 +1,15 @@
+
+body, html, #root { height: 100%; width: 100%; }
+body {
+  background: #F2F2F2;
+  margin: 0;
+}
+* { box-sizing: border-box; }
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hide_game {
+  visibility: hidden;
+}
