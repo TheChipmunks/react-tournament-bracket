@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tree from './components/tree';
-import { tree } from './localStore/data'
+import { matches } from './localStore/data'
 import './App.css'
 class App extends Component {
 
@@ -13,13 +13,27 @@ class App extends Component {
   }
   
   render() {
+    // const { matches } = this.props
     const { active } = this.state
     return (
     
-      <div className="App">
-        {tree.map( (grid, index) => (
-          <Tree key={index} data={grid} setHoverClass={this.setHoverClass} hoverClass={active} def={{ primaryColor: "#e4144f", lineColor: 'grey', teamWidth: 250, radius: 4, lineWeight: 3, width: 3 }} />
-        ))}
+      <div className="col-lg-7 col-md-8 col-sm-12 col-xs-12 ng_mt_20px">
+      {matches.map( (match, index  ) => (
+        <Tree
+          key={index} 
+          setHoverClass={this.setHoverClass} 
+          matchLength={match.length} 
+          hoverClass={active} 
+          data={match} 
+          def={{ 
+            primaryColor: "#e4144f", 
+            lineColor: 'grey', 
+            teamWidth: 250, 
+            radius: 0, 
+            lineWeight: 3, 
+            width: 3
+          }} />
+        ) )}
       </div>
     );
   }

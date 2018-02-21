@@ -1,29 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
-    RoundUI,
+  RoundUI,
+  RoundTitle
 } from '../../ui'
 import Game from './game'
 export class Round extends Component {
-  static propTypes = {
-    round: PropTypes.array
-  }
-
-  componentWillReceiveProps = ({ hoverTeam }) => {
-    if (hoverTeam !== this.props.hoverTeam) {
-      this.props.drawRoad()
-    }
-  }
 
   render() {
-    const { round, setHoverClass, roundHeight, drawRoad, hoverTeam, def } = this.props
+    const { round, setHoverClass, roundHeight, hoverTeam, def, count, isLast } = this.props
     return (
-            <RoundUI roundHeight={roundHeight} className="round">
-                {round.map( ( game, index ) => (
-                    <Game game={game} key={index} def={def} hoverTeam={hoverTeam} setHoverClass={setHoverClass} /> 
-                    )
-                )}
-            </RoundUI>
+      <RoundUI isHide={false} roundHeight={roundHeight} className="round">
+      <RoundTitle key={`round_title_${count}`}>{isLast ? 'Final' : `Round ${count + 1}`}</RoundTitle>
+        {round.map((game, index) => (
+          <Game game={game} key={index} def={def} hoverTeam={hoverTeam} setHoverClass={setHoverClass} />
+        )
+        )}
+      </RoundUI>
     )
   }
 }
