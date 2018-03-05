@@ -24,14 +24,21 @@ class App extends Component {
           setHoverClass={this.setHoverClass} 
           matchLength={match.length} 
           hoverClass={active} 
-          data={match} 
+          data={match}
+
           def={{ 
-            primaryColor: "#e4144f", 
-            lineColor: 'grey', 
-            teamWidth: 250, 
-            radius: 0, 
-            lineWeight: 3, 
-            width: 3
+            primaryColor: "#e4144f", //// primary color usign on :hover team
+            lineColor: 'grey', //// line color if game over
+            
+            teamWidth: 170,  /// team width :number
+            radius: 5, //// road angle radius
+
+            lineWeight: 3, //// road line width
+
+            isShowTeamLogo: true, //// team: { logo: path to logo}
+            defPathToTeamLogo: `/images/`, //// team: { logo: `${path :string}${logoname}` }
+            defTeamLogo: `default_team_logo.png` //// if team logo exist show this logo
+            
           }} />
         ) )}
       </div>
@@ -40,11 +47,3 @@ class App extends Component {
 }
 
 export default App;
-
-/// default 
-/// Set default this.props
-/// { color: '#ffffff', lineColor: '#e4144f', teamWidth: 250, radius: 4, lineWeight: 3 }
-
-/// if (!lineColor) {
-  // lineColor = primaryColor
-// }
