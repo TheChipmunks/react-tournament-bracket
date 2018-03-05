@@ -28,6 +28,7 @@ export const RoundUI = styled.section`
     z-index: 2;
     pointer-events: none;
     margin-left: ${({ collapse }) => (collapse || undefined)};
+    padding-top: 70px;
 `
 
 export const RoundTitle = styled.div`
