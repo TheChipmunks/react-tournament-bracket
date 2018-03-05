@@ -30,11 +30,13 @@ export class Team extends Component {
   render() {
     const { team, setHoverClass, hoverTeam, def, winner, isHoverGame } = this.props
     const { id, name, score, flag, place, logo, mR } = team
+    const { isShowTeamLogo, defTeamLogo, defPathToTeamLogo, teamWidth } = def
     console.log(mR, mR.length);
     return (
       <TeamUI
-      active={hoverTeam.toString() == id.toString()}
+        active={hoverTeam.toString() == id.toString()}
         lose={!winner}
+        teamWidth={teamWidth}
         primaryColor={def.primaryColor}
         className={`team ${id} ${winner ? 'team-winner' : 'team-loser'}`}
         onMouseOver={() => setHoverClass(id)}
@@ -42,10 +44,11 @@ export class Team extends Component {
         <TeamScore
           active={hoverTeam == id}
           lose={!winner}
-          primaryColor={def.primaryColor} >{score || `--`}</TeamScore>
+          primaryColor={def.primaryColor} >{score !== 0 || !score ? `--` : score}</TeamScore>
           {place && <TeamPlace place={place} />}
         <TeamName>
-          {logo && <SmallTeamLogo src={`/uploads/teams/150x150/${logo}`} />}
+          {isShowTeamLogo ? 
+            <SmallTeamLogo src={`${defPathToTeamLogo}${logo || defTeamLogo}`} /> : null}
           {name}
         </TeamName>
         {isHoverGame && 
@@ -62,8 +65,8 @@ export class Team extends Component {
 
 export default Team
 
-export const EmptyTeam = () => (
-  <TeamUI className={`team miss`}>
+export const EmptyTeam = ({ teamWidth }) => (
+  <TeamUI teamWidth={teamWidth} className={`team miss`}>
         <TeamScore>0</TeamScore>
         <TeamName>Empty</TeamName>
       </TeamUI>

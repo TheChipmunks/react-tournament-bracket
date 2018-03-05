@@ -21,6 +21,7 @@ export class Game extends PureComponent {
   render() {
     const { game, setHoverClass, hoverTeam, def } = this.props
     const { isHoverGame } = this.state
+    const { teamWidth } = def
     const { team, enemy_team, show } = game
     return (
 
@@ -32,7 +33,7 @@ export class Game extends PureComponent {
             isHoverGame={isHoverGame}
             hoverTeam={hoverTeam} 
             winner={this.isWinner(team.score, (enemy_team && enemy_team.score) || 0)} setHoverClass={setHoverClass} />
-            : <EmptyTeam />}
+            : <EmptyTeam teamWidth={teamWidth} />}
         {enemy_team ?
           <Team
             def={def}
@@ -40,7 +41,7 @@ export class Game extends PureComponent {
             isHoverGame={isHoverGame}
             hoverTeam={hoverTeam}
             winner={this.isWinner(enemy_team.score, (team && team.score) || 0)} setHoverClass={setHoverClass} />
-            : <EmptyTeam />}
+            : <EmptyTeam teamWidth={teamWidth} />}
       </GameUI>
     )
   }

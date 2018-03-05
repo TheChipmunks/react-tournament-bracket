@@ -22,12 +22,12 @@ export const RoundUI = styled.section`
     justify-content: space-around;
     height: 100%;
     padding: 0 20px;
-    min-height: ${({roundHeight}) => (`${roundHeight}px`)}; 
+    min-height: ${({ roundHeight }) => (`${roundHeight}px`)}; 
     flex-basis: 200px;
     position: relative;
     z-index: 2;
     pointer-events: none;
-    margin-left: ${({ collapse }) => ( collapse || undefined)};
+    margin-left: ${({ collapse }) => (collapse || undefined)};
 `
 
 export const RoundTitle = styled.div`
@@ -44,6 +44,7 @@ export const TeamUI = styled.div`
     display: flex;
     align-items: center;
     flex: 1 1 40px;
+    width: ${({ teamWidth }) => (teamWidth || 160)}px;
     cursor: pointer;
     border-left: 10px solid #DDD;
     transition: .2s;
@@ -64,7 +65,7 @@ export const TeamPlaceUI = styled.span`
     height: 25px;
     padding: 5px;
     background: ${({ bg }) => (bg)};
-    color: ${({ color }) => ( color )};
+    color: ${({ color }) => (color)};
     min-width: 25px;
     /* line-height: 30px; */
     right: -40px;
@@ -76,14 +77,14 @@ export const TeamPlaceUI = styled.span`
     position: absolute;
     left: -14px; top: calc(50% - 7px);
     border: 7.5px solid transparent;
-    border-right: 7.5px solid ${({bg}) => (bg)};
+    border-right: 7.5px solid ${({ bg }) => (bg)};
    }
 `
 const width = 30
 
 export const MapScoreWrap = styled.div`
     position: absolute;
-    right: -${({ scoreLength }) => (scoreLength * width + 7.5)}px;
+    right: -${({ scoreLength }) => (scoreLength * width)}px;
     height: 30px;
     display: flex;
     background: rgba(50, 50, 50, .8);
@@ -102,7 +103,7 @@ export const MapScore = styled.div`
     text-align: center;
     line-height: 30px;
     position: relative;
-    color: ${({ paired, count }) => (paired && ((count % 2) === 0 ) ? '#ffffff' : (!paired && ((count % 2) !== 0 ) ? '#ffffff' : '#999' ))};
+    color: ${({ paired, count }) => (paired && ((count % 2) === 0) ? '#ffffff' : (!paired && ((count % 2) !== 0) ? '#ffffff' : '#999'))};
 `
 
 export const TeamScore = styled.span`
@@ -118,9 +119,9 @@ export const TeamScore = styled.span`
 
 export const TeamPlace = ({ place }) => (
     place === 1 ? <TeamPlaceUI bg={'yellow'} color={'grey'}>1st</TeamPlaceUI> :
-    place === 2 ? <TeamPlaceUI bg={'grey'} color={'#000000'}>2nd</TeamPlaceUI> :
-    place === 3 ?  <TeamPlaceUI bg={'grey'} color={'#000000'}>3rd</TeamPlaceUI> :
-    place ? <TeamPlaceUI bg={'grey'} color={'#000000'}>{place}th</TeamPlaceUI> : null
+        place === 2 ? <TeamPlaceUI bg={'grey'} color={'#000000'}>2nd</TeamPlaceUI> :
+            place === 3 ? <TeamPlaceUI bg={'grey'} color={'#000000'}>3rd</TeamPlaceUI> :
+                place ? <TeamPlaceUI bg={'grey'} color={'#000000'}>{place}th</TeamPlaceUI> : null
 )
 export const TeamName = styled.span`
     flex: 1 1 auto;
