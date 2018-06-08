@@ -5,16 +5,27 @@ import {
   TeamUI,
   TeamName,
   TeamScore,
+  Flag,
   TeamPlace,
   SmallTeamLogo,
   MapScore,
   MapScoreWrap
 } from '../../ui'
 
-export class Team extends Component {
-  static propTypes = {
-    
+const places = ({isBronzeGame, isLast, winner, score, isGeneral, double, final}) => {
+  if (double && !final && isGeneral) {
+    return null
+  } else if (isLast && typeof(score) === "number" && !isGeneral) {
+   return  winner ? null : '3'
+  } else if (!double && isLast && typeof(score) === "number") {
+    return winner ? '1' : '2'
+  } else if (double && final && isLast && typeof(score) === "number") {
+    return winner ? '1' : '2'
   }
+  return null
+}
+
+export class Team extends Component {
 
   shouldComponentUpdate = ({ hoverTeam, isHoverGame }) => {
     if (
@@ -28,46 +39,58 @@ export class Team extends Component {
   }
 
   render() {
-    const { team, setHoverClass, hoverTeam, def, winner, isHoverGame } = this.props
-    const { id, name, score, flag, place, logo, mR } = team
-    const { isShowTeamLogo, defTeamLogo, defPathToTeamLogo, teamWidth } = def
-    console.log(mR, mR.length);
+    const { team, setHoverClass, isLast, hoverTeam, def, winner, isHoverGame, allMr, howTeam, isBronzeGame, isGeneral, double, final  } = this.props
+    const { id, name, score, flag, logo, mR } = team
+
+    const place = places({isBronzeGame, isLast, winner, score, isGeneral, double, final})
     return (
       <TeamUI
         active={hoverTeam.toString() == id.toString()}
         lose={!winner}
-        teamWidth={teamWidth}
         primaryColor={def.primaryColor}
         className={`team ${id} ${winner ? 'team-winner' : 'team-loser'}`}
         onMouseOver={() => setHoverClass(id)}
         onMouseLeave={() => setHoverClass('')}>
+        <TeamName>
+          <Flag flagname={flag} />
+          {logo && <SmallTeamLogo src={`/uploads/teams/150x150/${logo}`} />}
+          {name}
+        </TeamName>
         <TeamScore
           active={hoverTeam == id}
           lose={!winner}
-          primaryColor={def.primaryColor} >{score !== 0 || !score ? `--` : score}</TeamScore>
-          {place && <TeamPlace place={place} />}
-        <TeamName>
-          {isShowTeamLogo ? 
-            <SmallTeamLogo src={`${defPathToTeamLogo}${logo || defTeamLogo}`} /> : null}
-          {name}
-        </TeamName>
+          primaryColor={def.primaryColor} >{score ? score : score == '0' ? '0' : `--`}</TeamScore>
+        {!isHoverGame && place &&
+          <TeamPlace place={place} />}
         {isHoverGame && 
           <MapScoreWrap scoreLength={mR.length}>
-            {mR.map( (score, index) => (
-              <MapScore key={index} paired={winner} count={index}>{score}</MapScore>
-            ) )}
+            {allMr.length ? mR.map( (score, index) => (
+              <MapScore
+                key={index}
+                howTeam={howTeam} 
+                winner={allMr[index]}>
+                {score}
+              </MapScore>
+            ) ) : null}
           </MapScoreWrap>
         }
       </TeamUI>
     )
   }
 }
-
+Team.propTypes = {
+  def: PropTypes.object,
+  team: PropTypes.object,
+  hoverTeam: PropTypes.string,
+  isFinal: PropTypes.bool,
+  winner: PropTypes.bool,
+  setHoverClass: PropTypes.func
+}
 export default Team
 
-export const EmptyTeam = ({ teamWidth }) => (
-  <TeamUI teamWidth={teamWidth} className={`team miss`}>
-        <TeamScore>0</TeamScore>
-        <TeamName>Empty</TeamName>
-      </TeamUI>
+export const EmptyTeam = ({ isBronzeGame }) => (
+  <TeamUI isBronzeGame={isBronzeGame} className={`team miss`}>
+    <TeamName>TBD</TeamName>
+    <TeamScore>--</TeamScore>
+  </TeamUI>
 )

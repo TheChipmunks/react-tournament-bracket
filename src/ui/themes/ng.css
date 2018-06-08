@@ -1,0 +1,32 @@
+.ng_tree {
+    display: flex;
+	position: static;
+	align-items: center;
+	flex-direction: row-revers;
+	margin: 30px 0;
+}
+.ng_scroll {
+	width: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.ng_round {
+	font: 300 15px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	/* flex-direction: column; */
+	justify-content: space-around;
+	max-width: 150px;
+	min-width: 150px;
+	margin: 0 10px;
+	flex-basis: 200px;
+	position: static;
+	pointer-events: none;
+	height: 100%;
+}

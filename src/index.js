@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Example from './brackets';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Bracket from './bracket'
+import { single, double } from './data'
+console.log(double)
+ReactDOM.render(<Bracket matches={double} />, document.getElementById('root'));
 registerServiceWorker();
