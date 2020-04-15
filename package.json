@@ -5,14 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "jquery": "^3.2.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "jquery": "^3.5.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.0.17"
   },
   "devDependencies": {
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "styled-components": "^2.4.0"
   },
   "scripts": {
